@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:mobilya/pages/home/home_state.dart';
 import 'package:mobilya/state/main_state.dart';
+import 'package:mobilya/widget/my_sliver_grid.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends HomeState {
-  final MyState _myState = Get.put(MyState());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,48 +22,14 @@ class _HomePageState extends HomeState {
       slivers: [
         homeAppBar(),
         const SliverPadding(padding: EdgeInsets.only(top: 10)),
-        homeGrid()
+        MySliverGrid(finishAnimate: finishAnimate)
       ],
     ));
   }
 
-  SliverGrid homeGrid() {
-    return SliverGrid.builder(
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,childAspectRatio: 0.85),
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Card(
-                elevation: 1.5,
-                color: Get.theme.colorScheme.background,
-                child: Stack(
-                  children: [
-                    Image.asset("assets/images/products/p6.png",fit: BoxFit.fitHeight)
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text("Ahşap Masa",style: Get.textTheme.titleLarge!.copyWith(),),
-                    Text("Detay bilgi",style: Get.textTheme.labelLarge!.copyWith(color: Get.theme.hintColor),),
-                  ],
-                ),
-              ),
 
-            ],
-          ),
-        );
-      },
-    );
-  }
 
-  SliverAppBar homeAppBar() {
+  Widget homeAppBar() {
     return SliverAppBar(
       toolbarHeight: 500,
       flexibleSpace: PageView.builder(
@@ -86,7 +55,14 @@ class _HomePageState extends HomeState {
                 ],
               ),
             ],
-          );
+          ).animate(
+            onComplete: (controller) {
+              finishAnimate = true;
+            },
+          ).moveY(
+              begin: -500,
+              duration: Duration(milliseconds: 1500),
+              curve: Curves.linearToEaseOut);
         },
       ),
     );

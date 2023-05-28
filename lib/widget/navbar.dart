@@ -1,12 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilya/state/main_state.dart';
 
 class MyNavBar extends StatefulWidget {
-  MyNavBar({super.key, required this.child});
-  Widget child;
+  const MyNavBar({super.key, required this.child});
+  final Widget child;
 
   @override
   State<MyNavBar> createState() => _MyNavBarState();

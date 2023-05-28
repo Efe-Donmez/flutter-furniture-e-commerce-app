@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:mobilya/pages/cart/cart_state.dart';
 import 'package:mobilya/state/main_state.dart';
@@ -54,22 +55,17 @@ class _CartPageState extends CartState {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
-                          Text(
-                              "0",
-                              style: Get.textTheme.headlineMedium,
-                              textAlign: TextAlign.start,
-                            ),
-                          IconButton(onPressed: (){}, icon: const Icon(Icons.remove))
-                        ],
-                      )
+
                     ]),
                   )
                 ],
               ),
-            ));
+            )).animate(
+              onComplete: (controller) {
+                finishAnimate = true;
+              },
+
+            ).moveX(begin: !finishAnimate ? (800 +(100* index).toDouble()):0 ,duration: Duration(milliseconds: 800 + 100 *index),curve: Curves.linearToEaseOut);;;
       }),
     );
   }

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mobilya/pages/cart/cart_view.dart';
 import 'package:mobilya/pages/home/home_view.dart';
@@ -13,26 +12,26 @@ class MyRoutes {
   static List<GetPage<dynamic>>? routes = [
     GetPage(
         name: "/",
-        page: () => MyNavBar(
-              child: const HomePage(),
+        page: () => const MyNavBar(
+              child: HomePage(),
             ),
         transition: Transition.noTransition),
     GetPage(
         name: "/search",
-        page: () => MyNavBar(
-              child: const SearchPage(),
+        page: () => const MyNavBar(
+              child: SearchPage(),
             ),
         transition: Transition.noTransition),
     GetPage(
         name: "/cart",
-        page: () => MyNavBar(
-              child: const CartPage(),
+        page: () => const MyNavBar(
+              child: CartPage(),
             ),
         transition: Transition.noTransition),
     GetPage(
         name: "/profile",
-        page: () => MyNavBar(
-              child: const ProfilePage(),
+        page: () => const MyNavBar(
+              child: ProfilePage(),
             ),
         transition: Transition.noTransition),
   ];
